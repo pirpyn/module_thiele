@@ -1,6 +1,6 @@
 # Description
 
-Ce programme Fortran 2003 calcul un module de Thiele selon plusieurs paramètres.
+Ce programme Fortran 2003 calcule un module de Thiele selon plusieurs paramètres.
 Le module de Thiele est la solution `phi` de l'équation où `a,f,z` sont des paramètres à définir
 
     f = a*cosh(phi*z)/cosh(phi)
