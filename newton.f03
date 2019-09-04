@@ -10,17 +10,17 @@ program newton
     real(wp) :: gn, dgn, xn, tol
     real(wp) :: best
     
-    write(*,*) 'Progamme pour resoudre f = a cosh(phi z) / cosh(phi), inconnue phi'
+    write(*,*) 'Programme pour résoudre f = a cosh(phi z) / cosh(phi), inconnue phi, le module de Thiele'
     write(*,*) "On reformule le problème : on cherche le zero de la fonction"
     write(*,*) "       g(phi) = phi - acosh( a / f * cosh(phi z) )"
     write(*,*)
     write(*,*) "Note: Fournir depuis STDIN les valeurs numériques"
-    write(*,*) "a"
-    write(*,*) "f"
-    write(*,*) "z"
-    write(*,*) "tol ! Tolérance: on accepte phi si g(phi) < tol. Mettre 1E-3 si inconnu "
-    write(*,*) "itmax ! nombre maximal d'itérations. Mettre 100 si inconnu. "
-    write(*,*) "phi0 ! Estimation grossière du module pour démarrer l'algo. Mettre 1 si inconnu."
+    write(*,*) "a       Épaisseur du dépôt en micron en z = 1 cm"
+    write(*,*) "f       Épaisseur du dépôt en micron en z"
+    write(*,*) "z       Distance en centimètre"
+    write(*,*) "tol     Tolérance: on accepte phi si g(phi) < tol. Mettre 1E-3 si inconnu "
+    write(*,*) "itmax   Nombre maximal d'itérations. Mettre 100 si inconnu. "
+    write(*,*) "phi0    Estimation grossière du module pour démarrer l'algo. Mettre 1 si inconnu."
     write(*,*)
     
     read(*,*) a
