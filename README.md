@@ -3,7 +3,11 @@
 Ce programme Fortran 2003 calcul un module de Thiele selon plusieurs paramètres.
 Le module de Thiele est la solution `phi` de l'équation où `a,f,z` sont des paramètres à définir
 
-    f*cosh(phi)=a*cosh(phi*z)
+    f = a*cosh(phi*z)/cosh(phi)
+
+* `z` reprèsente la distance relative dans le pore. Par convention l'entrée est en `z=1` et le milieu en `z=0`.
+* `a` reprèsente l'épaisseur du dépot en micron à l'entrée du pore.
+* `f` represente l'épaisseur du dépot en micron en `z`.
 
 On reformule ce problème pour la méthode Newton:
 Trouver `phi` tel que `g(phi) = 0` où
