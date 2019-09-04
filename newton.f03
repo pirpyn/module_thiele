@@ -49,7 +49,7 @@ program newton
 
     write(*,*) "[INFO] Lancement de l'algorithme pour "
     write(*,'(7x,*(a16,1x))') 'a','f','z'
-    write(*,'(7x,*(es16.9,1x))') a, f, a
+    write(*,'(7x,*(es16.9,1x))') a, f, z
     write(*,*) "       ..."
     do while ((abs(gn).gt.abs(tol)).and.(it.lt.itmax))
       gn = g(xn,a,f,z)
