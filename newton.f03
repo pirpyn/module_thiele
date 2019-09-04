@@ -10,22 +10,34 @@ program newton
     real(wp) :: gn, dgn, xn, tol
     real(wp) :: best
     
-    write(*,*) 'Programme pour résoudre f = a cosh(phi z) / cosh(phi), inconnue phi, le module de Thiele'
-    write(*,*) "On reformule le problème : on cherche le zero de la fonction"
-    write(*,*) "       g(phi) = phi - acosh( a / f * cosh(phi z) )"
+    write(*,*) '[INFO] Programme pour résoudre par Newton f = a cosh(phi z) / cosh(phi), inconnue phi, le module de Thiele'
+    write(*,*) "       On reformule le problème : on cherche le zero de la fonction"
+    write(*,*) "              g(phi) = phi - acosh( a / f * cosh(phi z) )"
     write(*,*)
-    write(*,*) "Note: Fournir depuis STDIN les valeurs numériques"
-    write(*,*) "a       Épaisseur du dépôt en micron à l'entrée du pore"
-    write(*,*) "f       Épaisseur du dépôt en micron en z"
-    write(*,*) "z       Distance relative entre l'entrée et le milieu du pore"
-    write(*,*) "tol     Tolérance: on accepte phi si g(phi) < tol. Mettre 1E-3 si inconnu "
-    write(*,*) "itmax   Nombre maximal d'itérations. Mettre 100 si inconnu. "
-    write(*,*) "phi0    Estimation grossière du module pour démarrer l'algo. Mettre 1 si inconnu."
+    write(*,*) "[INFO] Fournir depuis STDIN les valeurs numériques"
+    write(*,*) "       a       Épaisseur du dépôt en micron à l'entrée du pore"
+    write(*,*) "       f       Épaisseur du dépôt en micron en z"
+    write(*,*) "       z       Distance relative entre l'entrée (z=1) et le milieu (z=0) du pore"
+    write(*,*) "       tol     Tolérance: on accepte phi si g(phi) < tol. Mettre 1E-3 si inconnu "
+    write(*,*) "       itmax   Nombre maximal d'itérations. Mettre 100 si inconnu. "
+    write(*,*) "       phi0    Estimation grossière du module pour démarrer l'algo. Mettre 1 si inconnu."
     write(*,*)
     
     read(*,*) a
+    if (a.lt.0.) then
+      write(*,*) "[FAIL] a doit être positif"
+      error stop
+    end if
     read(*,*) f
+    if (f.lt.0.) then
+      write(*,*) "[FAIL] f doit être positif"
+      error stop
+    end if
     read(*,*) z
+    if ((z.lt.0.).or.(z.gt.1.)) then
+      write(*,*) "[FAIL] z doit être compris entre 0 et 1"
+      error stop
+    end if
     read(*,*) tol
     read(*,*) itmax
     read(*,*) xn
@@ -35,27 +47,28 @@ program newton
     gn = g(xn,a,f,z)
     dgn = dg(xn,a,f,z)
 
-    write(*,*) "Lancement de l'algorithme"
-    write(*,'(*(a16,1x))') 'itération','phi','g',"g'"
-    write(*,'(i16,1x,3(es16.9,1x))') it, xn, gn, dgn
-    do while ((abs(gn).gt.tol).and.(it.lt.itmax))
+    write(*,*) "[INFO] Lancement de l'algorithme pour "
+    write(*,'(7x,*(a16,1x))') 'a','f','z'
+    write(*,'(7x,*(es16.9,1x))') a, f, a
+    write(*,*) "       ..."
+    do while ((abs(gn).gt.abs(tol)).and.(it.lt.itmax))
       gn = g(xn,a,f,z)
       dgn = dg(xn,a,f,z)
       if (abs(gn).lt.abs(g(best,a,f,z))) then
         best = xn
       end if
-      write(*,'(i16,1x,3(es16.9,1x))') it, xn, gn, dgn
+      ! write(*,'(i16,1x,3(es16.9,1x))') it, xn, gn, dgn
       xn = xn - gn/dgn
       it = it + 1
     end do
     if (it.lt.itmax) then
-      write(*,*) "L'algorithme a trouvé un zéro à la tolérance demandée."
+      write(*,*) "[OK]   L'algorithme a trouvé un zéro à la tolérance demandée."
     else
-      write(*,*) "L'algorithme n'a pas fini."
-      write(*,*) "Peut être faut-il plus d'itérations ou une tolérance plus grande."
-      write(*,*) "Néanmoins, le meilleur phi était"
+      write(*,*) "[FAIL] L'algorithme n'a pas fini dans le nombre maximal d'itérations autorisées."
+      write(*,*) "       Peut être faut-il plus d'itérations ou une tolérance plus grande."
+      write(*,*) "       Néanmoins, le meilleur phi était"
     end if
-    write(*, '(a,es12.5)') "Phi = ", best
+    write(*, '(1x,*(a,es12.5))') "phi = ", best, ', g(phi) = ',g(best,a,f,z)
     
 contains
 
