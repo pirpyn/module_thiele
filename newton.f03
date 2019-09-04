@@ -15,9 +15,9 @@ program newton
     write(*,*) "       g(phi) = phi - acosh( a / f * cosh(phi z) )"
     write(*,*)
     write(*,*) "Note: Fournir depuis STDIN les valeurs numériques"
-    write(*,*) "a       Épaisseur du dépôt en micron en z = 1 cm"
+    write(*,*) "a       Épaisseur du dépôt en micron à l'entrée du pore"
     write(*,*) "f       Épaisseur du dépôt en micron en z"
-    write(*,*) "z       Distance en centimètre"
+    write(*,*) "z       Distance relative entre l'entrée et le milieu du pore"
     write(*,*) "tol     Tolérance: on accepte phi si g(phi) < tol. Mettre 1E-3 si inconnu "
     write(*,*) "itmax   Nombre maximal d'itérations. Mettre 100 si inconnu. "
     write(*,*) "phi0    Estimation grossière du module pour démarrer l'algo. Mettre 1 si inconnu."
