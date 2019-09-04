@@ -15,7 +15,7 @@ Trouver `phi` tel que `g(phi) = 0` où
     g(phi) = phi - acosh( a/f*cosh(phi*z) )
 
 # Le tester en ligne
-Ce code est disponible sur [http://tpcg.io/5QC2CL](CodingGrouds). 
+Ce code est disponible sur [CodingGrouds](http://tpcg.io/5QC2CL). 
 Il est nécessaire d'autoriser les fonctionnalités Fortran 2003, donc il faut supprimer l'option `-std=f95` dans *Project->Compile Options* en haut à droite.
 Il faut fournir les paramètres dans l'onglet `STDIN` en haut à gauche.
 
