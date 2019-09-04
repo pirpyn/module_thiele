@@ -23,7 +23,16 @@ Il faut fournir les paramètres dans l'onglet `STDIN` en haut à gauche.
 Ce code compile sur une compilateur récent ( testé `gfortran 7.4.0` ). Un makefile simple est fourni.
 Il faut fournir les paramètres de puis l'entrée standard.
 
-Supposons que `test.txt` contient ces derniers alors le programme peut être exécuté comme suit
+Supposons que `test.txt` contient ces derniers:
+
+    1.245335107     ! a
+    0.99277         ! f
+    1.023219238     ! z
+    1E-1            ! tol
+    100             ! itmax
+    10              ! phi_0
+
+alors le programme peut être exécuté comme suit
 
     make run ARG=test.txt
 
